@@ -1,4 +1,4 @@
-const BASE = import.meta.env.VITE_API_URL || 'http://rationdepottracker-1.onrender.com';
+const BASE = import.meta.env.VITE_API_URL || 'https://rationdepottracker-1.onrender.com';
 
 async function request(path, options = {}) {
   const res = await fetch(`${BASE}/api${path}`, {
