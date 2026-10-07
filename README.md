@@ -52,7 +52,3 @@ npm run dev                 # http://localhost:5173
 | GET | /api/distributions/:id | One receipt |
 | GET | /api/summary | Dashboard numbers |
 
-## Before you put it on a resume
-Read every file and be able to explain it. Interviewers will ask why the stock update is atomic,
-what the error handler does, how validation works, and how the summary query is built.
-Change something yourself (a new field, a new report, a bug fix) and commit it to your own GitHub.
