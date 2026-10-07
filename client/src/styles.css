@@ -45,77 +45,134 @@ button.link { background: none; color: #1f6fb2; padding: 0; text-decoration: und
 /* Ration Depot Tracker - modern theme
    Replace client/src/styles.css with this file (back up the old one first). */
 
+
+   /* Ration Depot Tracker - theme matched to App.jsx
+   Structure: .app > header.topbar, nav.tabs > button.tab(.active), main */
+
 :root {
-  --bg: #f4f7fb;
+  --bg: #f1f5fa;
   --surface: #ffffff;
   --text: #1f2937;
   --muted: #64748b;
   --primary: #1e3a5f;
-  --primary-light: #2f5d94;
+  --primary-light: #2f6db5;
   --accent: #f59e0b;
   --border: #e2e8f0;
   --success: #15803d;
   --danger: #b91c1c;
-  --radius: 14px;
-  --shadow: 0 4px 20px rgba(30, 58, 95, 0.08);
+  --radius: 16px;
+  --shadow: 0 6px 24px rgba(30, 58, 95, 0.09);
 }
 
-* {
-  box-sizing: border-box;
-}
-
-html {
-  scroll-behavior: smooth;
-}
+* { box-sizing: border-box; }
 
 body {
   margin: 0;
   font-family: "Inter", "Segoe UI", system-ui, -apple-system, Roboto, Arial, sans-serif;
   color: var(--text);
   line-height: 1.55;
-  background:
-    radial-gradient(1200px 400px at 10% -10%, #dbe8f8 0%, transparent 60%),
-    radial-gradient(900px 400px at 100% 0%, #fde9c4 0%, transparent 55%),
-    var(--bg);
+  background: var(--bg);
   min-height: 100vh;
 }
 
-/* Page container */
-#root > div,
-.app,
-main {
+/* ---------- Layout ---------- */
+.app {
   max-width: 1100px;
   margin: 0 auto;
-  padding: 32px 20px 60px;
+  padding: 24px 18px 60px;
 }
 
-/* Headings */
-h1 {
+/* ---------- Header banner ---------- */
+.topbar {
+  padding: 28px 30px;
+  margin-bottom: 20px;
+  border-radius: var(--radius);
+  color: #ffffff;
+  background: linear-gradient(120deg, #1e3a5f 0%, #2f6db5 70%, #3f86d6 100%);
+  box-shadow: var(--shadow);
+  position: relative;
+  overflow: hidden;
+}
+
+.topbar::after {
+  content: "";
+  position: absolute;
+  right: -40px;
+  top: -40px;
+  width: 180px;
+  height: 180px;
+  border-radius: 50%;
+  background: rgba(245, 158, 11, 0.35);
+}
+
+.topbar h1 {
   margin: 0 0 6px;
-  font-size: clamp(1.8rem, 4vw, 2.5rem);
+  font-size: clamp(1.6rem, 4vw, 2.3rem);
   font-weight: 800;
   letter-spacing: -0.02em;
-  background: linear-gradient(90deg, var(--primary), var(--primary-light));
-  -webkit-background-clip: text;
-  background-clip: text;
-  color: transparent;
+  color: #ffffff;
+  position: relative;
+  z-index: 1;
 }
 
-h1 + p,
-header p {
-  margin: 0 0 22px;
-  color: var(--muted);
-  font-size: 1rem;
+.topbar p {
+  margin: 0;
+  color: #dbe8f8;
+  font-size: 0.98rem;
+  position: relative;
+  z-index: 1;
+}
+
+/* ---------- Tabs ---------- */
+.tabs {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  margin-bottom: 20px;
+}
+
+.tab {
+  font-family: inherit;
+  font-size: 0.95rem;
+  font-weight: 600;
+  padding: 10px 20px;
+  border-radius: 999px;
+  border: 1px solid var(--border);
+  background: var(--surface);
+  color: var(--primary);
+  cursor: pointer;
+  transition: all 0.15s ease;
+}
+
+.tab:hover {
+  background: #e8f0fb;
+  transform: translateY(-1px);
+}
+
+.tab.active {
+  background: linear-gradient(135deg, var(--primary), var(--primary-light));
+  color: #ffffff;
+  border-color: var(--primary);
+  box-shadow: 0 6px 16px rgba(30, 58, 95, 0.28);
+}
+
+/* ---------- Main content card ---------- */
+main {
+  background: var(--surface);
+  border-radius: var(--radius);
+  box-shadow: var(--shadow);
+  padding: 28px;
+  overflow-x: auto;
 }
 
 h2 {
-  margin: 0 0 16px;
+  margin: 0 0 18px;
   font-size: 1.4rem;
   color: var(--primary);
 }
 
 h3 {
-  margin: 26px 0 10px;
+  margin: 28px 0 12px;
   font-size: 1.05rem;
   color: var(--primary);
   display: flex;
@@ -131,88 +188,16 @@ h3::before {
   background: var(--accent);
 }
 
-/* Navigation tabs */
-nav,
-.tabs,
-.nav {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 10px;
-  margin-bottom: 22px;
-}
-
-button {
-  font-family: inherit;
-  font-size: 0.95rem;
-  font-weight: 600;
-  padding: 10px 18px;
-  border-radius: 10px;
-  border: 1px solid var(--border);
-  background: var(--surface);
-  color: var(--primary) !important;
-  cursor: pointer;
-  transition: transform 0.15s ease, box-shadow 0.15s ease, background 0.15s ease;
-}
-
-button:hover {
-  background: #eef3fa;
-  transform: translateY(-1px);
-  box-shadow: 0 4px 12px rgba(30, 58, 95, 0.12);
-}
-
-button:active {
-  transform: translateY(0);
-}
-
-button.active,
-button[aria-selected="true"],
-button[class*="active"],
-button[class*="selected"] {
-  background: linear-gradient(135deg, var(--primary), var(--primary-light));
-  color: #ffffff !important;
-  border-color: var(--primary);
-  box-shadow: 0 6px 16px rgba(30, 58, 95, 0.28);
-}
-
-button[type="submit"],
-button.primary {
-  background: linear-gradient(135deg, var(--primary), var(--primary-light));
-  color: #ffffff !important;
-  border-color: var(--primary);
-}
-
-button:disabled {
-  opacity: 0.55;
-  cursor: not-allowed;
-  transform: none;
-  box-shadow: none;
-}
-
-/* Cards and panels */
-section,
-[class*="card"],
-[class*="panel"],
-[class*="box"] {
-  background: var(--surface);
-  border-radius: var(--radius);
-  box-shadow: var(--shadow);
-}
-
-#root > div > section,
-#root > div > div:not(nav):not(.tabs):not(.nav):not(header) {
-  padding: 26px;
-}
-
-/* Stat tiles on the dashboard */
+/* ---------- Dashboard tiles (generic class guesses) ---------- */
 [class*="stat"],
 [class*="kpi"],
 [class*="tile"],
-[class*="metric"] {
+[class*="metric"],
+[class*="summary"] > div {
   background: linear-gradient(135deg, #eef4fc, #f8fafc);
   border: 1px solid var(--border);
   border-radius: 12px;
   padding: 18px 20px;
-  box-shadow: none;
 }
 
 [class*="stat"] strong,
@@ -222,16 +207,47 @@ section,
 [class*="stat"] b,
 [class*="kpi"] b {
   display: block;
-  font-size: 2.1rem;
+  font-size: 2.2rem;
   line-height: 1.1;
   color: var(--primary);
 }
 
-/* Forms */
+/* ---------- Buttons inside pages ---------- */
+main button,
+.modal button,
+[class*="modal"] button,
+[class*="overlay"] button {
+  font-family: inherit;
+  font-size: 0.95rem;
+  font-weight: 600;
+  padding: 10px 18px;
+  border-radius: 10px;
+  border: none;
+  background: linear-gradient(135deg, var(--primary), var(--primary-light));
+  color: #ffffff;
+  cursor: pointer;
+  transition: transform 0.15s ease, box-shadow 0.15s ease;
+}
+
+main button:hover,
+[class*="modal"] button:hover,
+[class*="overlay"] button:hover {
+  transform: translateY(-1px);
+  box-shadow: 0 6px 14px rgba(30, 58, 95, 0.25);
+}
+
+main button:disabled {
+  opacity: 0.55;
+  cursor: not-allowed;
+  transform: none;
+  box-shadow: none;
+}
+
+/* ---------- Forms ---------- */
 form {
   display: flex;
   flex-wrap: wrap;
-  gap: 12px;
+  gap: 14px;
   align-items: flex-end;
   margin-bottom: 20px;
 }
@@ -245,9 +261,7 @@ label {
   color: var(--muted);
 }
 
-input,
-select,
-textarea {
+input, select, textarea {
   font-family: inherit;
   font-size: 0.95rem;
   padding: 10px 12px;
@@ -259,19 +273,15 @@ textarea {
   transition: border-color 0.15s ease, box-shadow 0.15s ease;
 }
 
-input:focus,
-select:focus,
-textarea:focus {
+input:focus, select:focus, textarea:focus {
   outline: none;
   border-color: var(--primary-light);
-  box-shadow: 0 0 0 3px rgba(47, 93, 148, 0.18);
+  box-shadow: 0 0 0 3px rgba(47, 109, 181, 0.2);
 }
 
-::placeholder {
-  color: #94a3b8;
-}
+::placeholder { color: #94a3b8; }
 
-/* Tables */
+/* ---------- Tables ---------- */
 table {
   width: 100%;
   border-collapse: separate;
@@ -297,28 +307,12 @@ tbody td {
   border-bottom: 1px solid var(--border);
 }
 
-tbody tr:last-child td {
-  border-bottom: none;
-}
+tbody tr:last-child td { border-bottom: none; }
+tbody tr:nth-child(even) { background: #fafcff; }
+tbody tr:hover { background: #f0f6fd; }
 
-tbody tr:nth-child(even) {
-  background: #fafcff;
-}
-
-tbody tr:hover {
-  background: #f1f6fd;
-}
-
-/* Wide tables scroll on small screens */
-section,
-[class*="card"],
-[class*="panel"] {
-  overflow-x: auto;
-}
-
-/* Messages */
-[class*="error"],
-.error {
+/* ---------- Messages ---------- */
+[class*="error"], .error {
   color: var(--danger);
   background: #fef2f2;
   border: 1px solid #fecaca;
@@ -327,8 +321,7 @@ section,
   font-weight: 600;
 }
 
-[class*="success"],
-.success {
+[class*="success"], .success {
   color: var(--success);
   background: #f0fdf4;
   border: 1px solid #bbf7d0;
@@ -337,61 +330,57 @@ section,
   font-weight: 600;
 }
 
-[class*="muted"],
-small {
-  color: var(--muted);
+[class*="muted"], small { color: var(--muted); }
+
+/* ---------- Receipt popup (guessing common class names) ---------- */
+[class*="overlay"],
+[class*="backdrop"],
+[class*="modal-bg"] {
+  position: fixed;
+  inset: 0;
+  background: rgba(15, 23, 42, 0.55);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 16px;
+  z-index: 50;
 }
 
-/* Small entrance animation */
+[class*="receipt"] {
+  background: #ffffff;
+  border-radius: 14px;
+  padding: 24px;
+  max-width: 460px;
+  width: 100%;
+  max-height: 90vh;
+  overflow-y: auto;
+  box-shadow: 0 20px 50px rgba(15, 23, 42, 0.3);
+}
+
+/* ---------- Animation ---------- */
 @media (prefers-reduced-motion: no-preference) {
-  section,
-  [class*="card"],
-  table {
-    animation: fadeUp 0.35s ease both;
-  }
-
+  main { animation: fadeUp 0.35s ease both; }
   @keyframes fadeUp {
-    from {
-      opacity: 0;
-      transform: translateY(8px);
-    }
-    to {
-      opacity: 1;
-      transform: translateY(0);
-    }
+    from { opacity: 0; transform: translateY(8px); }
+    to   { opacity: 1; transform: translateY(0); }
   }
 }
 
-/* Mobile */
+/* ---------- Print: receipt only ---------- */
+@media print {
+  .topbar, .tabs { display: none; }
+  body { background: #ffffff; }
+  main { box-shadow: none; }
+}
+
+/* ---------- Mobile ---------- */
 @media (max-width: 640px) {
-  #root > div,
-  .app,
-  main {
-    padding: 20px 14px 40px;
-  }
-
-  button {
-    padding: 9px 14px;
-    font-size: 0.9rem;
-  }
-
-  form {
-    flex-direction: column;
-    align-items: stretch;
-  }
-
-  input,
-  select,
-  textarea {
-    width: 100%;
-  }
-
-  table {
-    font-size: 0.85rem;
-  }
-
-  thead th,
-  tbody td {
-    padding: 10px 10px;
-  }
+  .app { padding: 14px 12px 40px; }
+  .topbar { padding: 20px; }
+  main { padding: 18px; }
+  .tab { padding: 9px 14px; font-size: 0.9rem; }
+  form { flex-direction: column; align-items: stretch; }
+  input, select, textarea { width: 100%; }
+  table { font-size: 0.85rem; }
+  thead th, tbody td { padding: 10px; }
 }
